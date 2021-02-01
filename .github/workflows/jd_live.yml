@@ -6,7 +6,7 @@ name: jd_live
 on:
   workflow_dispatch:
   schedule:
-    - cron: '10-20/5 * * * *'
+    - cron: '0 */1 * * *'
   watch:
     types: started
   repository_dispatch:
@@ -31,7 +31,11 @@ jobs:
       - name: '运行 【京东直播】'
         run: |
           cd ~/scripts
-          node jd_live.js
+          node jd_newYearMoney_lottery.js
+          node jd_newYearMoney.js
+          node jd_818.js
+          node jd_5g.js
+          node jd_xgyl.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
