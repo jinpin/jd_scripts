@@ -58,13 +58,14 @@ const JD_API_HOST = 'https://rdcseason.m.jd.com/api/';
 const activeEndTime = '2021/2/4 23:59:59+08:00';
 const addUrl = 'http://jd.turinglabs.net/helpcode/create/';
 const printUrl = `http://jd.turinglabs.net/api/v2/jd/5g/read/30/`;
-let helpCode = ["7a181ae9-cecf-49a0-b73f-17a9c40c5b5e","8ce25343-ed32-4237-9a6f-633154ef00bc","b132e139-8f5d-4e88-a49b-db5dfa8001cb","4b3cc07f-1fdc-4b4c-b446-a179bc8ffade","95722ebc-fed5-4c79-bde6-ff61ab93af4d",]
+let helpCode = ["10455d52-4ec3-4949-a550-e031f7c14bd3","a920f1ad-945d-4989-8bb7-f4f23c83c2ed","a920f1ad-945d-4989-8bb7-f4f23c83c2ed","259c04a9-4f5d-458f-b976-859392f3bf5e", "1aa5fe17-8f8a-45c2-a97a-ab6ac4ce0470","c97ec387-f67f-4bae-bf3a-c1e01b4fdc3d",]
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
   $.temp = [];
+  await updateShareCodesCDN();
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -589,7 +590,6 @@ async function doHelp() {
   }
   // await updateShareCodes();
   // if (!$.updatePkActivityIdRes) await updateShareCodesCDN();
-  await updateShareCodesCDN();
   if ($.updatePkActivityIdRes && $.updatePkActivityIdRes['shareCodes']) tempCode = $.updatePkActivityIdRes['shareCodes'];
   console.log(`是否大于当天九点🕘:${nowTime > new Date(nowTime).setHours(9, 0, 0, 0)}`)
   //当天大于9:00才从API里面取收集的助力码
@@ -858,10 +858,10 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/LXK9301/updat
     })
   })
 }
-function updateShareCodesCDN(url = 'https://gitee.com/lxk0301/updateTeam/raw/master/jd_shareCodes.json') {
+function updateShareCodesCDN(url = 'https://gitee.com/lxk0301/updateTeam/raw/master/shareCodes/jd_shareCodes.json') {
   return new Promise(resolve => {
     //https://cdn.jsdelivr.net/gh/LXK9301/updateTeam@master/jd_shareCodes.json
-    $.get({url}, async (err, resp, data) => {
+    $.get({url , headers:{"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0")}}, async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
