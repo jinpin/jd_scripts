@@ -103,9 +103,9 @@
  
 - 获取京东cookie教程可参考：
   
-  + [浏览器获取京东cookie教程](https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md)
+  + [浏览器获取京东cookie教程](https://github.com/269569205/jd_scripts/blob/master/backUp/GetJdCookie.md)
     
-  + [插件获取京东cookie教程](https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie2.md)
+  + [插件获取京东cookie教程](https://github.com/269569205/jd_scripts/blob/master/backUp/GetJdCookie2.md)
     
   + 京东APP扫码获取cookie(此种方式获取的cookie有效期为90天)(执行`node getJDCookie.js`即可)
 
