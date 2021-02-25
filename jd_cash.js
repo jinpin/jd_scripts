@@ -27,10 +27,10 @@ let cookiesArr = [], cookie = '', message;
 let helpAuthor = false;
 const randomCount = $.isNode() ? 20 : 5;
 const inviteCodes = [
-   `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
- `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
- `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
-  `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
+   `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA@eU9YarnjMv5y8WbVn3JA1w`,
+ `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA@eU9YarnjMv5y8WbVn3JA1w`,
+ `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA@eU9YarnjMv5y8WbVn3JA1w`,
+  `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA@eU9YarnjMv5y8WbVn3JA1w`,
    `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
     `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
 	 `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw`,
@@ -288,6 +288,7 @@ function shareCodesFormat() {
       console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex].split('@');
+	  $.authorCode=[];
       let authorCode = deepCopy($.authorCode)
       $.newShareCodes = [...(authorCode.map((item, index) => authorCode[index] = item['inviteCode'])), ...$.newShareCodes];
     }
