@@ -7,34 +7,32 @@
 ============Quantumultx===============
 [task_local]
 #签到领现金
-2 */4 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_cash.js, tag=签到领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+2 *4 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_cash.js, tag=签到领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "2 */4 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_cash.js,tag=签到领现金
+cron "2 * * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_cash.js,tag=签到领现金
 
 ===============Surge=================
-签到领现金 = type=cron,cronexp="2 */4 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_cash.js
+签到领现金 = type=cron,cronexp="2 4 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_cash.js
 
-============小火箭=========
-签到领现金 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_cash.js, cronexpr="2 */4 * * *", timeout=3600, enable=true
  */
 const $ = new Env('签到领现金');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
+let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-let helpAuthor = true;
+let helpAuthor = false;
 const randomCount = $.isNode() ? 20 : 5;
 const inviteCodes = [
-   `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw`,
- `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw`,
- `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw`,
-  `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw`,
-   `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw`,
-    `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw`,
+   `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
+ `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
+ `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
+  `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
+   `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
+    `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw@eU9Ya-26NP0m8WbRmSYXgA`,
 	 `eU9YM5fPNZ5MryunoyVu@IhM3beiwYvog9ma6iw@eU9YM5fPNZ5MryunoyVu@eU9YaO3hYfkkp2bVy3oQ1g@IR0-aeq7ZPwj@IhM-bemwb_Um8Gu6iw`,
 	 ]
 if ($.isNode()) {
@@ -371,7 +369,7 @@ function getAuthorShareCode() {
       try {
         if (err) {
         } else {
-          $.authorCode = JSON.parse(data)
+          //$.authorCode = JSON.parse(data)
         }
       } catch (e) {
         $.logErr(e, resp)
