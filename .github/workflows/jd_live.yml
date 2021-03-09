@@ -32,7 +32,7 @@ jobs:
         run: |
           cd ~/scripts
           node jd_newYearMoney_lottery.js
-          node jd_newYearMoney.js
+          node jd_live.js
           node jd_xgyl.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
